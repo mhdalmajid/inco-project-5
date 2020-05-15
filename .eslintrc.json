@@ -18,7 +18,7 @@
     "import/no-extraneous-dependencies": "off",
     "no-underscore-dangle": "off",
     "no-console": "off",
-    "no-unused-vars": "off",
+    "no-unused-vars": "warn",
     "no-plusplus": "off",
     "prefer-const": "off",
     "prettier/prettier": [

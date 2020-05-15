@@ -4,7 +4,7 @@
   "description": "schedules server",
   "main": "server.js",
   "scripts": {
-    "start": "node server.js"
+    "start": "nodemon ."
   },
   "author": "",
   "license": "MIT",
