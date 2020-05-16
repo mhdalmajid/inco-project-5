@@ -1,27 +1,59 @@
 {{> menu}}
 
-<div class="container">
-    <div class="table_container">
+<div class="container ">
+    <div class="cards_container">
+        {{#if movies}}
+        {{#each movies}}
+        <div class="movie_card " style="background-image: url('{{large_cover_image}}');">
+            <div class="movie_card_content">
+                <div class="movie_header">
+                    <h3>{{title_english}}</h3>
+                    <span>{{year}}</span>
+                </div>
+                <p>{{synopsis}}</p>
+                <div class="movie_rate">
+                    <form class="rating">
+                        <label>
+                            <input type="radio" name="stars" value="1" />
+                            <span class="icon">★</span>
+                        </label>
+                        <label>
+                            <input type="radio" name="stars" value="2" />
+                            <span class="icon">★</span>
+                            <span class="icon">★</span>
+                        </label>
+                        <label>
+                            <input type="radio" name="stars" value="3" />
+                            <span class="icon">★</span>
+                            <span class="icon">★</span>
+                            <span class="icon">★</span>
+                        </label>
+                        <label>
+                            <input type="radio" name="stars" value="4" />
+                            <span class="icon">★</span>
+                            <span class="icon">★</span>
+                            <span class="icon">★</span>
+                            <span class="icon">★</span>
+                        </label>
+                        <label>
+                            <input type="radio" name="stars" value="5" />
+                            <span class="icon">★</span>
+                            <span class="icon">★</span>
+                            <span class="icon">★</span>
+                            <span class="icon">★</span>
+                            <span class="icon">★</span>
+                        </label>
+                    </form>
+                </div>
+            </div>
 
-        <table class="table mb-5 ">
-            <thead class=" ">
-                <tr>
-                    <th>Firestore</th>
-                    <th>Day</th>
-                    <th>Start at</th>
-                    <th>End at</th>
-                </tr>
-            </thead>
-            <tbody>
-                {{#each schedules}}
-                <tr>
-                    <td scope="row"><a href="/user/{{user_id}}">{{firstname}}</a></td>
-                    <td scope="row">{{getDay day}}</td>
-                    <td>{{truncTime start_at}}</td>
-                    <td>{{truncTime end_at}}</td>
-                </tr>
-                {{/each}}
-            </tbody>
-        </table>
+        </div>
+        {{/each}}
+        {{/if}}
     </div>
 </div>
+
+
+{{!-- {{background_image} --}}
+{{!-- {{title_long}} --}}
+{{!-- {{synopsis}} --}}

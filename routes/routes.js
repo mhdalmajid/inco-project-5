@@ -1,14 +1,22 @@
 const express = require('express')
+const axios = require('axios')
 const { getUserByEmailAndPass } = require('../model/model')
-const { routeProtector } = require('../helpers/auth')
-const { getSchedules, signup } = require('../model/model')
+// const { routeProtector } = require('../helpers/auth')
+const { signup } = require('../model/model')
 
 const router = express.Router()
 
 const indexGet = async (req, res) => {
-  const data = await getSchedules()
-  res.render('index', { schedules: data })
+  await axios
+    .get('https://yts.mx/api/v2/list_movies.json?limit=6')
+    .then((data) => {
+      const result = data.data
+      if (result.status === 'ok') return res.render('index', { movies: result.data.movies })
+      return res.render('index')
+    })
+    .catch((error) => res.render('error', { error }))
 }
+
 const loginGet = (req, res) => {
   if (req.session.user) return res.redirect('/')
   return res.render('login', { data: '' })

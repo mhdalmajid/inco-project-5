@@ -1,37 +1,6 @@
 const createError = require('http-errors')
 const { hashPassword, comparePassword } = require('../helpers/auth')
 
-const insertSchedule = async (schedule) => query(`INSERT INTO schedules SET ?`, schedule)
-
-const getSchedules = async () =>
-  query(`SELECT users.lastname,
-        users.firstname,
-        user_id,
-        day,
-        start_at,
-        end_at
-        FROM schedules
-        LEFT JOIN users
-        ON schedules.user_id = users.id`)
-
-const getSchedulesByUserId = async (userID) =>
-  query(`SELECT * FROM schedules WHERE user_id = ?`, [userID])
-
-const getUserSchedulesByUserId = async (userID) => {
-  const result = await query(
-    `SELECT users.lastname,
-          users.firstname,
-          user_id,
-          day,
-          start_at,
-          end_at
-          FROM schedules
-          LEFT JOIN users
-          ON schedules.user_id = users.id`,
-    [userID]
-  )
-  return result
-}
 const getUserById = async (userID) =>
   query(`SELECT id,firstname,lastname,email FROM users WHERE id=?`, [userID])
 
@@ -68,11 +37,7 @@ const signup = async (user) => {
 }
 
 module.exports = {
-  getSchedules,
-  getSchedulesByUserId,
-  getUserSchedulesByUserId,
   getUserByEmailAndPass,
-  insertSchedule,
   signup,
   getUserById,
 }
