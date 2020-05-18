@@ -154,12 +154,14 @@
 
 .rating:not(:hover) label input:checked ~ .icon,
 .rating:hover label:hover input ~ .icon {
-  color: #09f;
+  color: #fae740;
+  /* color: #09f; */
 }
 
 .rating label input:focus:not(:checked) ~ .icon:last-child {
   color: #000;
-  text-shadow: 0 0 5px #09f;
+  text-shadow: 0 0 5px #fae740;
+  /* text-shadow: 0 0 5px #09f; */
 }
 
 @media only screen and (max-width: 1189.8px) {

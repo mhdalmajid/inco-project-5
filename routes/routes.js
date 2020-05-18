@@ -11,7 +11,11 @@ const indexGet = async (req, res) => {
     .get('https://yts.mx/api/v2/list_movies.json?limit=6')
     .then((data) => {
       const result = data.data
-      if (result.status === 'ok') return res.render('index', { movies: result.data.movies })
+      if (result.status === 'ok')
+        return res.render('index', {
+          movies: result.data.movies,
+          userId: req.session.user.id,
+        })
       return res.render('index')
     })
     .catch((error) => res.render('error', { error }))
@@ -53,6 +57,30 @@ const signupPost = async (req, res) => {
   }
 }
 
+const rateMovie = async (req, res) => {
+  // { movieId: null, userId: null, ratingValue: '1 to 5' }
+  try {
+    let result
+    const { movieId, userId, ratingValue } = req.body
+    const userIdIfRated = await query('SELECT id FROM movie WHERE movie_id=? AND user_id=?', [
+      movieId,
+      userId,
+    ])
+    if (userIdIfRated.length > 0)
+      result = await query('UPDATE movie SET rate=? WHERE id=?', [ratingValue, userIdIfRated[0].id])
+    else
+      result = await query('INSERT INTO movie (movie_id, user_id, rate) value(?, ?, ?)', [
+        movieId,
+        userId,
+        ratingValue,
+      ])
+
+    res.json({ requested: result })
+  } catch (error) {
+    console.log(error)
+  }
+}
+
 router.get('/', indexGet)
 
 router.get('/login', loginGet)
@@ -62,5 +90,7 @@ router.get('/signup', signupGet)
 router.post('/signup', signupPost)
 
 router.get('/logout', logoutGet)
+
+router.post('/rate', rateMovie)
 
 module.exports = router

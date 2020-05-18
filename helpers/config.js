@@ -19,7 +19,7 @@ const dbConfigDev = {
   host: 'localhost',
   user: 'root',
   password: 'admin',
-  database: 'schedule',
+  database: 'movies',
 }
 
 const sessConfig = {

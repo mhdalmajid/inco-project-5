@@ -9,10 +9,12 @@
                 <div class="movie_header">
                     <h3>{{title_english}}</h3>
                     <span>{{year}}</span>
+                    {{!-- <span>{{ConvertRateTo5stars rating}}</span> --}}
+                    <span>rate {{rating}}</span>
                 </div>
                 <p>{{synopsis}}</p>
                 <div class="movie_rate">
-                    <form class="rating">
+                    <form class="rating" data-user-id="{{../userId}}" data-movie-id="{{id}}">
                         <label>
                             <input type="radio" name="stars" value="1" />
                             <span class="icon">★</span>
